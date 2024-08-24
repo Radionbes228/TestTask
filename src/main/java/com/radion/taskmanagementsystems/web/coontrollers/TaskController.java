@@ -8,10 +8,6 @@ import com.radion.taskmanagementsystems.service.TaskService;
 import com.radion.taskmanagementsystems.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,31 +23,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/tasks")
 @AllArgsConstructor
 @Tag(name = "Task Controller", description = "The controller responsible for operations with tasks")
-@ApiResponses({
-        @ApiResponse(responseCode = "400", description = "Invalid request data",
-                content = @Content(
-                        schema = @Schema(
-                                example = "{\"error\": \"Invalid request data\"}"
-                        )
-                )),
-        @ApiResponse(responseCode = "404", description = "Not found task or user (author or assignee) || Task not found for id",
-                content = @Content(
-                        schema = @Schema(
-                                example = "{ \"error\": \"Task not found for id\", \"error\": \"The assignee or author with this id was not found\" }"
-                        )
-                )
-        )
-})
 public class TaskController {
     private TaskService taskService;
     private UserService userService;
 
 
     @Operation(summary = "Information about a specific task", description = "Allows you to get information about a specific task along with comments")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Invalid request data"),
-            @ApiResponse(responseCode = "404", description = "Task not found for id")
-    })
     @GetMapping("/infoTask")
     public ResponseEntity<Task> infoTask(@RequestParam(name = "id")
                                              @Parameter(description = "Task ID", required = true) Long id
@@ -60,18 +37,13 @@ public class TaskController {
     }
 
     @Operation(summary = "Create a task")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Invalid request data"),
-            @ApiResponse(responseCode = "404", description = "Not found task or user (author or assignee) || Task not found for id")
-    })
     @PostMapping("/create")
-    public ResponseEntity<Object> createTask(@RequestBody @Valid
+    public ResponseEntity<Task> createTask(@RequestBody @Valid
                                                  @Parameter(
                                                          description = "JSON string with task fields for creating the task itself",
                                                          required = true) TaskCreateDto taskCreateDto
     ){
-        taskService.createTask(taskCreateDto);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(taskService.createTask(taskCreateDto));
     }
 
     @Operation(summary = "Update a task", description = "Allows you to update a task")

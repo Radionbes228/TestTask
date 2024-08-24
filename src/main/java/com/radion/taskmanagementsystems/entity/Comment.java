@@ -24,13 +24,13 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Schema(description = "Comment text", maximum = "1000", minimum = "2")
+    @Schema(description = "Comment text")
     @NotBlank(message = "{not.blank.invalid}")
     @Size(message = "{size.invalid}", min = 2, max = 1000)
     @Column(nullable = false)
     private String text;
 
-    @Schema(description = "Comment author")
+    @Schema(description = "Comment id author")
     @NotNull(message = "{not.null.invalid}")
     @ManyToOne
     @JoinColumn(nullable = false)

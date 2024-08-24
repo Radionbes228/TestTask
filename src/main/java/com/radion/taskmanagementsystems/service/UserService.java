@@ -6,9 +6,12 @@ import com.radion.taskmanagementsystems.entity.User;
 import com.radion.taskmanagementsystems.exception.UserNotFoundException;
 import com.radion.taskmanagementsystems.repository.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import java.util.Locale;
 
 
 @Service
@@ -16,9 +19,10 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
 
     private final UserJpaRepository userRepository;
+    public final MessageSource messageSource;
     public User findById(Long id){
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("{UserNotFoundExceptionSecurity}"));
+                .orElseThrow(() -> new UserNotFoundException(messageSource.getMessage("UserNotFoundExceptionSecurity", null, Locale.getDefault())));
     }
 
     @Override

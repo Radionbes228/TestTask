@@ -44,6 +44,9 @@ public class TaskService {
                 .orElseThrow(() -> new NotFoundTaskException(messageSource.getMessage("NotFoundTaskException", null, Locale.getDefault())));
     }
     public void deleteTask(Long taskId) {
+        if (!taskRepository.existsById(taskId)){
+            throw new NotFoundTaskException(messageSource.getMessage("NotFoundTaskException", null, Locale.getDefault()));
+        }
         taskRepository.deleteById(taskId);
     }
 

@@ -39,8 +39,6 @@ public class AuthenticationService {
                 request.getPassword()
         ));
 
-
-
         var jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
     }

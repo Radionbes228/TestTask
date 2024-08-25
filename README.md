@@ -25,4 +25,4 @@
 4. Swagger UI будет доступен по адресу `http://localhost:8082/swagger-ui.html`.
 ## Документация API
 
-Полная документация API доступна через Swagger UI по адресу: `http://localhost:8082/swagger-ui.html`.
+Полная документация API доступна через Swagger UI по адресу: `http://localhost:8082/swagger-ui.html` или `http://localhost:8082/v3/api-docs`.

@@ -12,7 +12,7 @@
 
     ```bash
     cd your-repo-name
-    git clone https://github.com/your-username/your-repo-name.git
+    git clone https://github.com/Radionbes228/TestTask.git
     ```
 
 2. Запустите сервис с помощью Docker Compose:

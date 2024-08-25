@@ -8,15 +8,19 @@
 - Docker Compose
 
 ### Шаги для запуска
-1. Клонируйте репозиторий:
-
+1. Перейдите в подготовленную папку для проекта:
     ```bash
     cd your-repo-name
+    ```
+2. Склонируйте проект:
+    ```bash
     git clone https://github.com/Radionbes228/TestTask.git
     ```
-
-2. Запустите сервис с помощью Docker Compose:
-
+4. Запустите очистку и сборку проекта с помощью maven:
+   ```bash
+   mvn clean package
+   ```
+5. Запустите сервис с помощью Docker Compose:
     ```bash
     docker-compose up --build
     ```
